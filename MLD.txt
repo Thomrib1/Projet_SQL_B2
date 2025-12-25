@@ -1,0 +1,21 @@
+MLD
+
+CLIENT (id_client, nom, prenom, email, telephone, date_inscription, validite_permis)
+
+LOCATION (id_location, heure_debut, heure_fin, statut_location, #id_client, #id_vehicule)
+
+RESERVATION (id_reservation, date_debut_reservation, date_fin_reservation, statut_reservation, #id_client, #id_vehicule)
+
+PAIEMENT (id_paiement, montant_total, statut_paiement, #id_location UNIQUE)
+
+TRANSACTION (id_transaction, montant_transaction, moyen_paiement, statut_transaction, #id_paiement)
+
+VEHICULE (id_vehicule, marque, modele, annee, energie, autonomie_km, UNIQUE(immatriculation), etat, dernier_controle, type_vehicule, #id_station)
+
+STATION (id_station, nom, capacite_max_vehicules, lieu)
+
+BORNE_DE_RECHARGE (id_borne, puissance_kw, statut_borne, type_connecteur, #id_station)
+
+MAINTENANCE (id_maintenance, date_demande, date_intervention, statut_maintenance, cout_intervention, #id_vehicule, #id_technicien)
+
+TECHNICIEN (id_technicien, nom, prenom, email, telephone, date_embauche, statut)
