@@ -1,15 +1,3 @@
-CREATE TABLE VEHICULES (
-    id_vehicule SERIAL PRIMARY KEY,
-    marque VARCHAR(50) NOT NULL,
-    modele VARCHAR(50) NOT NULL,
-    annee INT,
-    energie VARCHAR(20),
-    autonomie_km INT,
-    immatriculation VARCHAR(20) UNIQUE,
-    etat VARCHAR(30),
-    dernier_controle DATE
-);
-
 CREATE TABLE CLIENTS (
     id_client SERIAL PRIMARY KEY,
     Nom VARCHAR(50) NOT NULL,
@@ -24,45 +12,54 @@ CREATE TABLE LOCATIONS (
     id_location SERIAL PRIMARY KEY,
     heure_debut TIMESTAMP,
     heure_fin TIMESTAMP,
-    statut_location VARCHAR(30)
-);
-
-CREATE TABLE PAIEMENTS (
-    id_paiement SERIAL PRIMARY KEY,
-    montant_total DECIMAL(10,2) NOT NULL,
-    statut_paiement VARCHAR(30)
-);
-
-CREATE TABLE TRANSACTIONS (
-    id_transaction SERIAL PRIMARY KEY,
-    montant_transaction DECIMAL(10,2) NOT NULL,
-    moyen_paiement VARCHAR(30) NOT NULL,
-    statut_transaction VARCHAR(30) NOT NULL
+    statut_location VARCHAR(30),
+    id_client INT,
+    id_vehicule INT,
+    FOREIGN KEY (id_client) REFERENCES CLIENTS(id_client),
+    FOREIGN KEY (id_vehicule) REFERENCES VEHICULES(id_vehicule)
 );
 
 CREATE TABLE RESERVATIONS (
     id_reservation SERIAL PRIMARY KEY,
     date_debut_reservation TIMESTAMP,
     date_fin_reservation TIMESTAMP,
-    statut_reservation VARCHAR(30)
+    statut_reservation VARCHAR(30),
+    id_client INT,
+    id_vehicule INT,
+    FOREIGN KEY (id_client) REFERENCES CLIENTS(id_client),
+    FOREIGN KEY (id_vehicule) REFERENCES VEHICULES(id_vehicule)
 );
 
-CREATE TABLE MAINTENANCES (
-    id_maintenance SERIAL PRIMARY KEY,
-    date_demande DATE,
-    date_intervention DATE,
-    statut_maintenance VARCHAR(30),
-    cout_intervention DECIMAL(10,2)
+CREATE TABLE PAIEMENTS (
+    id_paiement SERIAL PRIMARY KEY,
+    montant_total DECIMAL(10,2) NOT NULL,
+    statut_paiement VARCHAR(30),
+    id_location INT,
+    FOREIGN KEY (id_location) REFERENCES LOCATIONS(id_location)
 );
 
-CREATE TABLE TECHNICIENS (
-    id_technicien SERIAL PRIMARY KEY,
-    Nom VARCHAR(50),
-    Prenom VARCHAR(50),
-    email VARCHAR(100),
-    telephone VARCHAR(20),
-    date_demande DATE,
-    statut VARCHAR(30)
+CREATE TABLE TRANSACTIONS (
+    id_transaction SERIAL PRIMARY KEY,
+    montant_transaction DECIMAL(10,2) NOT NULL,
+    moyen_paiement VARCHAR(30) NOT NULL,
+    statut_transaction VARCHAR(30) NOT NULL,
+    id_paiement INT,
+    FOREIGN KEY (id_paiement) REFERENCES PAIEMENTS(id_paiement)
+);
+
+CREATE TABLE VEHICULES (
+    id_vehicule SERIAL PRIMARY KEY,
+    marque VARCHAR(50) NOT NULL,
+    modele VARCHAR(50) NOT NULL,
+    annee INT,
+    energie VARCHAR(20),
+    autonomie_km INT,
+    immatriculation VARCHAR(20) UNIQUE,
+    etat VARCHAR(30),
+    dernier_controle DATE,
+    type_vehicule VARCHAR(50),
+    id_station INT,
+    FOREIGN KEY (id_station) REFERENCES STATIONS(id_station)
 );
 
 CREATE TABLE STATIONS (
@@ -73,8 +70,32 @@ CREATE TABLE STATIONS (
 );
 
 CREATE TABLE BORNES_DE_RECHARGE (
-    id_borne_de_recharge SERIAL PRIMARY KEY,
+    id_borne SERIAL PRIMARY KEY,
     puissance_kw INT,
     statut_borne VARCHAR(30),
-    type_connecteur VARCHAR(30)
+    type_connecteur VARCHAR(30),
+    id_station INT,
+    FOREIGN KEY (id_station) REFERENCES STATIONS(id_station)
+);
+
+CREATE TABLE MAINTENANCES (
+    id_maintenance SERIAL PRIMARY KEY,
+    date_demande DATE,
+    date_intervention DATE,
+    statut_maintenance VARCHAR(30),
+    cout_intervention DECIMAL(10,2),
+    id_vehicule INT,
+    id_technicien INT,
+    FOREIGN KEY (id_vehicule) REFERENCES VEHICULES(id_vehicule),
+    FOREIGN KEY (id_technicien) REFERENCES TECHNICIENS(id_technicien)
+);
+
+CREATE TABLE TECHNICIENS (
+    id_technicien SERIAL PRIMARY KEY,
+    Nom VARCHAR(50),
+    Prenom VARCHAR(50),
+    email VARCHAR(100),
+    telephone VARCHAR(20),
+    date_embauche DATE,
+    statut VARCHAR(30)
 );
