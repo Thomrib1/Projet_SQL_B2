@@ -3,7 +3,7 @@ CREATE TABLE VEHICULE (
     marque VARCHAR(50) NOT NULL,
     modele VARCHAR(50) NOT NULL,
     annee INT,
-    energie VARCHAR(50),
+    energie VARCHAR(20),
     autonomie_km INT,
     immatriculation VARCHAR(20) UNIQUE,
     etat VARCHAR(30),
@@ -27,15 +27,15 @@ CREATE TABLE LOCATIONS (
     statut_location VARCHAR(30)
 );
 
-CREATE TABLE PGAIEMENTS (
+CREATE TABLE PAIEMENTS (
     id_paiement SERIAL PRIMARY KEY,
-    montant_total DECIMAL(20) NOT NULL,
+    montant_total DECIMAL(10,2) NOT NULL,
     statut_paiement VARCHAR(30)
 );
 
 CREATE TABLE TRANSACTIONS (
     id_transaction SERIAL PRIMARY KEY,
-    montant_transaction DECIMAL(20) NOT NULL,
+    montant_transaction DECIMAL(10,2) NOT NULL,
     moyen_paiement VARCHAR(30) NOT NULL,
     statut_transaction VARCHAR(30) NOT NULL
 );
@@ -47,7 +47,7 @@ CREATE TABLE RESERVATIONS (
     statut_reservation VARCHAR(30)
 );
 
-CREATE TABLE MAINTENANCE (
+CREATE TABLE MAINTENANCES (
     id_maintenance SERIAL PRIMARY KEY,
     date_demande DATE,
     date_intervention DATE,
