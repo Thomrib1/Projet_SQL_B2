@@ -1,4 +1,4 @@
-CREATE TABLE Vehicule (
+CREATE TABLE VEHICULE (
     id_vehicule SERIAL PRIMARY KEY,
     marque VARCHAR(50) NOT NULL,
     modele VARCHAR(50) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE Vehicule (
     dernier_controle DATE
 );
 
-CREATE TABLE Clients (
+CREATE TABLE CLIENT (
     id_client SERIAL PRIMARY KEY,
     Nom VARCHAR(50) NOT NULL,
     Prenom VARCHAR(50) NOT NULL,
@@ -20,30 +20,61 @@ CREATE TABLE Clients (
     validite_permis DATE
 );
 
-CREATE TABLE Locations (
+CREATE TABLE LOCATIONS (
     id_location SERIAL PRIMARY KEY,
     heure_debut TIMESTAMP,
     heure_fin TIMESTAMP,
     statut_location VARCHAR(30)
 );
 
-CREATE TABLE Paiements (
+CREATE TABLE PGAIEMENTS (
     id_paiement SERIAL PRIMARY KEY,
     montant_total DECIMAL(20) NOT NULL,
     statut_paiement VARCHAR(30)
 );
 
-CREATE TABLE transactions (
+CREATE TABLE TRANSACTIONS (
     id_transaction SERIAL PRIMARY KEY,
     montant_transaction DECIMAL(20) NOT NULL,
     moyen_paiement VARCHAR(30) NOT NULL,
     statut_transaction VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE reservations (
+CREATE TABLE RESERVATIONS (
     id_reservation SERIAL PRIMARY KEY,
     date_debut_reservation TIMESTAMP,
     date_fin_reservation TIMESTAMP,
     statut_reservation VARCHAR(30)
 );
 
+CREATE TABLE MAINTENANCE (
+    id_maintenance SERIAL PRIMARY KEY,
+    date_demande DATE,
+    date_intervention DATE,
+    statut_maintenance VARCHAR(30),
+    cout_intervention DECIMAL(10,2)
+);
+
+CREATE TABLE TECHNICIENS (
+    id_technicien SERIAL PRIMARY KEY,
+    Nom VARCHAR(50),
+    Prenom VARCHAR(50),
+    email VARCHAR(100),
+    telephone VARCHAR(20),
+    date_demande DATE,
+    statut VARCHAR(30)
+);
+
+CREATE TABLE STATIONS (
+    id_station SERIAL PRIMARY KEY,
+    Nom VARCHAR(50),
+    capacite_max_vehicules INT,
+    lieu VARCHAR(100)
+);
+
+CREATE TABLE BORNES_DE_RECHARGE (
+    id_borne_de_recharge SERIAL PRIMARY KEY,
+    puissance_kw INT,
+    statut_borne VARCHAR(30),
+    type_connecteur VARCHAR(30)
+);
