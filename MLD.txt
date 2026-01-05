@@ -1,21 +1,21 @@
 MLD
 
+STATIONS (id_station, nom, capacite_max_vehicules, lieu)
+
 CLIENTS (id_client, nom, prenom, email, telephone, date_inscription, validite_permis)
+
+TECHNICIENS (id_technicien, nom, prenom, email, telephone, date_embauche, statut)
+
+VEHICULES (id_vehicule, marque, modele, annee, energie, autonomie_km, immatriculation, etat, dernier_controle, localisation, #id_station)
+
+BORNES_DE_RECHARGE (id_borne, puissance_kw, statut_borne, type_connecteur, #id_station)
 
 LOCATIONS (id_location, heure_debut, heure_fin, statut_location, #id_client, #id_vehicule)
 
 RESERVATIONS (id_reservation, date_debut_reservation, date_fin_reservation, statut_reservation, #id_client, #id_vehicule)
 
+MAINTENANCES (id_maintenance, date_demande, date_intervention, statut_maintenance, cout_intervention, #id_vehicule, #id_technicien)
+
 PAIEMENTS (id_paiement, montant_total, statut_paiement, #id_location)
 
 TRANSACTIONS (id_transaction, montant_transaction, moyen_paiement, statut_transaction, #id_paiement)
-
-VEHICULES (id_vehicule, marque, modele, annee, energie, autonomie_km, immatriculation, etat, dernier_controle, type_vehicule, #id_station)
-
-STATIONS (id_station, nom, capacite_max_vehicules, lieu)
-
-BORNES_DE_RECHARGE (id_borne, puissance_kw, statut_borne, type_connecteur, #id_station)
-
-MAINTENANCES (id_maintenance, date_demande, date_intervention, statut_maintenance, cout_intervention, #id_vehicule, #id_technicien)
-
-TECHNICIENS (id_technicien, nom, prenom, email, telephone, date_embauche, statut)
