@@ -6,7 +6,7 @@ CLIENTS (id_client, nom, prenom, email, telephone, date_inscription, validite_pe
 
 TECHNICIENS (id_technicien, nom, prenom, email, telephone, date_embauche, statut)
 
-VEHICULES (id_vehicule, marque, modele, annee, energie, autonomie_km, immatriculation, etat, dernier_controle, localisation, #id_station)
+VEHICULES (id_vehicule, marque, modele, annee, energie, autonomie_km, immatriculation, etat, localisation, #id_station)
 
 BORNES_DE_RECHARGE (id_borne, puissance_kw, statut_borne, type_connecteur, #id_station)
 
