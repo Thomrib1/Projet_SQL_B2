@@ -15,7 +15,7 @@ WHERE id_client NOT IN (SELECT id_client FROM reservations);
 CREATE OR REPLACE VIEW vue_stations_capacite AS
 SELECT nom, lieu, capacite_max_vehicules FROM stations;
 
--- 5. Mise à jour auto de l'état véhicule pendant maintenance
+-- 5. Mise à jour auto état du véhicule pendant maintenance
 CREATE OR REPLACE FUNCTION fn_update_statut_maintenance()
 RETURNS TRIGGER AS $$
 BEGIN
